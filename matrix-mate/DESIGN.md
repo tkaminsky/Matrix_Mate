@@ -21,7 +21,9 @@ With this flow in mind, I'll talk about each component in turn.
 The design of the html files is centered around a layout file, with every other file (with the
 exception of instructions.html) extending layout.html. The layout consists of a top bar with the
 title "Matrix Mate!" and a navbar with buttons corresponding to each of the components of the site.
-Forms are used to input the necessary data for each feature, which is handled in app.py.
+Forms are used to input the necessary data for each feature, which is handled in app.py. I chose this
+method to minimize the number of necessary files, as well as to maintain a sense of continuity between
+pages.
 
 3) Back-End: Python
 
@@ -32,7 +34,7 @@ a one-dimensional list corresponding to the input vector, and the second, ws, is
 scalar with which to multiply the vector to get a graphable coordinate. Like the overall logic of the
 program, all of these functions take the unprocessed v information (the input vector in human-graphable
 coordinates) and output processed coordinates which can be graphed on a canvas element. To simplify the
-javascript-side of things as much as possible, I tried to make the arguments passed to flask almost
+javascript-side of things as much as possible, I tried to make the arguments passed to Flask almost
 exclusively be coordinate-pairs. 
 
 4) Back-End: Flask
@@ -50,8 +52,10 @@ go to mresult.html instead, because it was graphing so many lines.
 
 Once I had all the necessary information, I just needed to visualize it. After looking through the matplotlib documentation,
 I decided that I actually wanted the freedom of a simple canvas element, and so I ended up using that. For simplicity
-I made the canvas size always 400px by 400 px, which allows for information to be comfortably displayed on all reasonable
+I made the canvas size always 400px by 400px, which allows for information to be comfortably displayed on all reasonable
 screen sizes (I did add some additional CSS to make sure that information was never cut off by changing screen size, of course).
 For some sense of continuity I made graph1 be a common element on every page (except instructions.html), and so the
 corresponding logic is housed in layout.html. The only time that additional canvases are used is for the matrix 
 transformation visualizer, in which case that logic is housed in the extension mresult.html.
+
+That's the basic structure of my project. I hope you enjoy it!
