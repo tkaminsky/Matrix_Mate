@@ -1,3 +1,15 @@
+Hello, and welcome to Matrix Mate! Do to the size of the project, I was unable to upload 
+it via Gradescope. Because of this, please access the source code through the following 
+instructions:
+
+1. Go to https://github.com/tkaminsky/Matrix_Mate.git
+2. Click on the 'Code' dropdown menu
+3. If you have git installed, feel free to type 'git clone [URL]' to download the project to 
+    your desired folder
+4. Otherwise, just click 'Download ZIP'.
+5. Unzip the application, and a copy of this README.md file will contain all of the instructions 
+    on how to run the application beyond this point, as well as another copy of the DESIGN.md file.
+
 Starting the Application:
 
 First, download all source code in the matrix-mate folder and store along a path known to you.
