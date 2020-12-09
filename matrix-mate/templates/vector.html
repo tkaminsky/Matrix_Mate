@@ -1,0 +1,86 @@
+{% extends "layout.html" %}
+
+{% block main %}
+    <h3 style="text-align: center">This is the Vector Visualizer. Up to five vectors can be visualized:</h3>
+
+    <div class="dropdown" id="dropdownMenu">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Number of Vectors
+        </button>
+
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" href="javascript:makeVectors(1)">1</a>
+            <a class="dropdown-item" href="javascript:makeVectors(2)">2</a>
+            <a class="dropdown-item" href="javascript:makeVectors(3)">3</a>
+            <a class="dropdown-item" href="javascript:makeVectors(4)">4</a>
+            <a class="dropdown-item" href="javascript:makeVectors(5)">5</a>
+        </div>
+    </div>
+
+    <form class="input-form" id="vectorInput" action="/vector" method="post">
+            <table id="table" style="width:200px">
+            </table>
+    </form>
+
+    <canvas class="graph" id="graph1" width="400" height="400"></canvas>
+{% endblock %}
+
+{% block script %}
+    <script>
+        // Creates the input boxes for each vector
+        function makeVectors(n) {
+            // For every vector
+            for (let i = 1; i <= n; i++)
+            {
+                // Gets the table of inputs
+                var table = document.getElementById("table");
+
+                // Makes a new row
+                var row = document.createElement("tr");
+
+                // Adds the prompt to the new row
+                var paragraph = document.createElement("p");
+                var paraText = document.createTextNode("Enter Vector " + i.toString(10) + ":");
+                paragraph.appendChild(paraText);
+                row.appendChild(paragraph);
+
+                // Creates the container for each input vector
+                var entryContainer = document.createElement("td");
+                entryContainer.setAttribute('style', "display: flex; flex-direction: column");
+
+                // Adds the vector's entry input boxes to each row
+                for (let j = 1; j <= 2; j++) {
+                    // Creates an input tag
+                    var entry = document.createElement("input");
+                    entry.setAttribute('autocomplete', "off");
+                    entry.setAttribute('class', "form-control");
+                    entry.setAttribute('name', i.toString(10) + j.toString(10))
+                    entry.setAttribute('placeholder', "0");
+                    entry.setAttribute('type', "text");
+
+                    // Appends the input tag to the entryContainer
+                    entryContainer.appendChild(entry);
+                    row.appendChild(entryContainer);
+                }
+                // Adds the whole shebang (the paragraph and the container with two entry inputs) to the table
+                table.appendChild(row);
+            }
+            // Gets the form ID
+            var form = document.getElementById("vectorInput");
+
+            // Adds a submit button to the form
+            var button = document.createElement("button");
+            button.setAttribute('class', "btn btn-light");
+            button.setAttribute('type', "submit");
+            button.setAttribute('style', "width: 100%;");
+            var text = document.createTextNode("Submit");
+            button.appendChild(text);
+            form.appendChild(button);
+
+            // Deletes the original dropdown menu
+            var menu = document.getElementById("dropdownMenu");
+            var background = document.getElementById("background");
+            background.removeChild(menu);
+        }
+    </script>
+{% endblock %}

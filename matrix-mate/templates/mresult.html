@@ -1,0 +1,71 @@
+{% extends "layout.html" %}
+
+{% block main %}
+    <div class="graph-box">
+        <canvas class="graph" id="graph1" width="400" height="400"></canvas>
+        <canvas class="graph" id="arrow" width="200" height="400" style="border: None"></canvas>
+        <canvas class="graph" id="graph2" width="400" height="400"></canvas>
+    </div>
+{% endblock %}
+
+{% block script %}
+    <script>
+        //Draws an arrow between the two graphs
+        var arr = document.getElementById('arrow');
+        // Makes sure that canvas works on the user's browser
+        if (arr.getContext)
+        {
+            var ctx = arr.getContext('2d');
+            ctx.strokeStyle = '#000000';
+            ctx.lineWidth = 5;
+
+            ctx.beginPath();
+            ctx.moveTo(25, 200);
+            ctx.lineTo(177, 200);
+            ctx.stroke();
+
+            ctx.moveTo(175, 200);
+            ctx.lineTo(150, 175);
+            ctx.stroke();
+
+            ctx.moveTo(177, 200);
+            ctx.lineTo(150, 225);
+            ctx.stroke();
+        }
+
+        // Graph2 corresponds to the graph showing the result of the transformation
+        var graph2 = document.getElementById('graph2');
+        // Makes sure that canvas works on the user's browser
+        if (graph2.getContext)
+        {
+            var ctx = graph2.getContext('2d');
+
+            let axes = {{ axes|safe }};
+            let gridlines = {{ gridlines|safe }};
+
+            // Draws the new gridlines (if they exist)
+            for (let i = 0, l = gridlines.length; i < l; i++)
+            {
+                ctx.beginPath();
+                ctx.strokeStyle = '#ffcccc';
+                ctx.lineWidth = 1;
+
+                ctx.moveTo(gridlines[i][0][0], gridlines[i][0][1]);
+                ctx.lineTo(gridlines[i][1][0], gridlines[i][1][1]);
+                ctx.stroke();
+            }
+
+            // Draws the new axes (if they exist)
+            for (let i = 0, l = axes.length; i < l; i++)
+            {
+                ctx.beginPath();
+                ctx.strokeStyle = '#ff0000';
+                ctx.lineWidth = 5;
+
+                ctx.moveTo(axes[i][0][0], axes[i][0][1]);
+                ctx.lineTo(axes[i][1][0], axes[i][1][1]);
+                ctx.stroke();
+            }
+        }
+    </script>
+{% endblock %}

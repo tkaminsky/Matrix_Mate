@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+
+{% block main %}
+    <h3 style="text-align: center">Please select one of the following vector operations:</h3>
+
+    <div class="btn-group" role="group" aria-label="Basic example">
+        <a type="button" class="btn btn-light" href="/addition" style="font-weight: bolder;">Vector<br>Addition</a>
+        <a type="button" class="btn btn-light" href="/multiplication" style="font-weight: bolder;">Scalar<br>Multiplication</a>
+        <a type="button" class="btn btn-light" href="/decomposition" style="font-weight: bolder;">Orthogonal<br>Decomposition</a>
+    </div>
+
+    <canvas class="graph" id="graph1" width="400" height="400"></canvas>
+{% endblock %}
+
+{% block script %}
+{% endblock %}

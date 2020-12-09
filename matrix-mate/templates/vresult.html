@@ -1,0 +1,46 @@
+{% extends "layout.html" %}
+
+{% block main %}
+    <h3 style="text-align: center">{{ message }}</h3>
+    <canvas class="graph" id="graph1" width="400" height="400"></canvas>
+{% endblock %}
+
+{% block script %}
+    <script>
+        // Draws our vector arrows (found on stackoverflow)
+        // https://stackoverflow.com/questions/808826/draw-arrow-on-canvas-tag
+        function canvas_arrow(context, fromx, fromy, tox, toy)
+        {
+            var headlen = 10; // length of head in pixels
+            var dx = tox - fromx;
+            var dy = toy - fromy;
+            var angle = Math.atan2(dy, dx);
+            context.moveTo(fromx, fromy);
+            context.lineTo(tox, toy);
+            context.lineTo(tox - headlen * Math.cos(angle - Math.PI / 6), toy - headlen * Math.sin(angle - Math.PI / 6));
+            context.moveTo(tox, toy);
+            context.lineTo(tox - headlen * Math.cos(angle + Math.PI / 6), toy - headlen * Math.sin(angle + Math.PI / 6));
+        }
+
+        // Graph1 corresponds to the canvas displaying the vectors
+        var graph1 = document.getElementById('graph1');
+        // Makes sure that canvas works on the user's browser
+        if (graph1.getContext)
+        {
+            var ctx = graph1.getContext('2d');
+
+            let end_coords = {{ end_coords|safe }};
+            let start_coords = {{ start_coords|safe }};
+            let colors = {{ colors|safe }};
+
+            // For every vector, graph it
+            for (let i = 0, l = end_coords.length; i < l; i++) {
+                ctx.beginPath();
+                ctx.strokeStyle = colors[i];
+                ctx.lineWidth = 3;
+                canvas_arrow(ctx, start_coords[i][0], start_coords[i][1], end_coords[i][0], end_coords[i][1]);
+                ctx.stroke();
+            }
+        }
+    </script>
+{% endblock %}

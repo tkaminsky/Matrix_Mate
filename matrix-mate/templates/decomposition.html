@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+
+{% block main %}
+    <h3 style="text-align: center">Please enter the vector whose components you'd like to decompose: </h3>
+    <form class="input-form" action="/decomposition" method="post">
+        <table style="width:200px">
+            <tr style="display: flex; flex-direction: column">
+                <td><p>Vector:</p></td>
+                <td><input autocomplete="off" autofocus class="form-control" name="a" placeholder="0" type="text" style="text-align: center;"></td>
+                <td><input autocomplete="off" autofocus class="form-control" name="b" placeholder="0" type="text" style="text-align: center;"></td>
+            </tr>
+        </table>
+
+        <button class="btn btn-light" type="submit" style="width: 100%">Calculate</button>
+    </form>
+
+    <canvas class="graph" id="graph1" width="400" height="400"></canvas>
+{% endblock %}
